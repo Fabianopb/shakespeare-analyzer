@@ -4,7 +4,18 @@ class AnalyzerController < ApplicationController
   end
 
   def results
-    @test = 'some result will appear here'
+    @speechCount = Hash.new
+
+    doc = Nokogiri::XML(open('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml'))
+
+    speeches = doc.css('SPEECH')
+    speeches.each do |speech|
+      speaker = speech.at_css('SPEAKER').content
+      lines = speech.css('LINE')
+      if speaker != 'ALL'
+        @speechCount[speaker] = @speechCount[speaker].nil? ? lines.size : @speechCount[speaker] + lines.size
+      end
+    end
   end
 
 end

@@ -1,4 +1,8 @@
 <h1>Analyzer#results</h1>
 <p>Find me in app/views/analyzer/results.html.erb</p>
 
-<%= @test %>
+<ul>
+  <% @speechCount.each do |speech| %>
+    <li><%= "#{speech[0]}, #{speech[1]}" %></li>
+  <% end %>
+</ul>
