@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'analyzer#index'
 
   get 'analyzer/index'
+  get 'analyzer/results_data', defaults: { format: 'json' }
 
   post 'analyzer/results'
 

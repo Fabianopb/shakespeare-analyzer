@@ -12,4 +12,9 @@ class AnalyzerControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get results_data url' do
+    get analyzer_results_data_url
+    assert_response :success
+  end
+
 end
