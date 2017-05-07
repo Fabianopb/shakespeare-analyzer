@@ -10,9 +10,6 @@ class AnalyzerController < ApplicationController
     @@speechCount = Hash.new
     @speechCount = @@speechCount
 
-    # if doc.nil?
-    #   render 'Something went wrong! Are you sure the link is correct?'
-    # end
     begin
       doc = Nokogiri::XML(open(url))
 
