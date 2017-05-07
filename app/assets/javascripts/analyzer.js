@@ -1,6 +1,8 @@
 var ANALYZER = (function() {
   'use strict';
 
+  var containerId;
+
   var drawGraph = function(data) {
     var width = 800;
     var barHeight = 20;
@@ -28,7 +30,7 @@ var ANALYZER = (function() {
       .scale(y)
       .orient('left');
 
-    var svg = d3.select('#graph').append('svg')
+    var svg = d3.select('#' + containerId).append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
@@ -87,7 +89,10 @@ var ANALYZER = (function() {
   };
 
   return {
-    getData: getData
+    renderGraph: function(id) {
+      containerId = id;
+      getData();
+    }
   };
 
 })();
