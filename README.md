@@ -7,10 +7,6 @@ Simple application to analyze the number of speeches each character says in a pl
 Clone the application and run:
 
 ```
-bundle install
-```
-
-```
 rails server
 ```
 
