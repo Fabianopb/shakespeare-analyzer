@@ -7,7 +7,7 @@ var ANALYZER = (function() {
     var width = 800;
     var barHeight = 20;
     var height = barHeight * data.length;
-    var margin = { top: 25, right: 35, bottom: 25, left: 140 };
+    var margin = { top: 25, right: 50, bottom: 25, left: 140 };
 
     var x = d3.scale.linear()
       .range([0, width])

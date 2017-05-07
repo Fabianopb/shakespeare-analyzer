@@ -10,6 +10,8 @@ class AnalyzerController < ApplicationController
 
     doc = Nokogiri::XML(open('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml'))
 
+    @title = doc.css('TITLE').first.content
+
     speeches = doc.css('SPEECH')
     totalLines = doc.css('LINE')
     speeches.each do |speech|
