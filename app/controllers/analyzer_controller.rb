@@ -1,12 +1,11 @@
 class AnalyzerController < ApplicationController
 
-  @@speechCount = Hash.new
-
   def index
   end
 
   def results
 
+    @@speechCount = Hash.new
     @speechCount = @@speechCount
 
     doc = Nokogiri::XML(open('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml'))
@@ -26,7 +25,15 @@ class AnalyzerController < ApplicationController
   end
 
   def results_data
-    render :json => @@speechCount
+    data = Array.new
+    @@speechCount.each do |speaker, lines|
+      dataPoint = Hash.new
+      dataPoint['speaker'] = speaker.capitalize
+      dataPoint['lines'] = lines
+      data.push dataPoint
+    end
+    data.sort_by! { |dataPoint| dataPoint['lines'] }
+    render :json => data.reverse
   end
 
 end

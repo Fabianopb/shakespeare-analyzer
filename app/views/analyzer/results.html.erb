@@ -1,10 +1,8 @@
 <h1>Analyzer#results</h1>
 <p>Find me in app/views/analyzer/results.html.erb</p>
 
-<ul>
-  <% @speechCount.each do |speaker, lines| %>
-    <li><%= "#{speaker}, #{lines}" %></li>
-  <% end %>
-</ul>
+<div id="graph"></div>
 
-<%= link_to 'Data', action: 'results_data' %>
+<script>
+  ANALYZER.getData();
+</script>
