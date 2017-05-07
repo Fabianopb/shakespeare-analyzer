@@ -3,16 +3,17 @@
   <p>You can analyze plays to see how many lines each character speaks. Simply provide the link for the play in xml format and press <em>Analyze</em>.</p>
 </div>
 
-<div class="error-message">
-  <% flash.each do |key, value| %>
+
+<% flash.each do |key, value| %>
+  <div class="error-message">
     <%= "#{value}" %>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <div class="form-container">
-  <%= form_tag("/analyzer/results", method: "post") do %>
-    <%= label_tag(:play, "What play will be today?") %>
-    <%= text_field_tag(:play) %>
-    <%= submit_tag("Analyze") %>
+  <%= form_tag('/analyzer/results', method: 'post', class: 'form-elements') do %>
+    <h3><%= label_tag :play, 'What play will be today?' %></h3>
+    <%= text_field_tag :play, '', class: 'form-input' %>
+    <%= submit_tag 'Analyze', class: 'form-button' %>
   <% end %>
 </div>
