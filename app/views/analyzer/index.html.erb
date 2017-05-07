@@ -1,4 +1,18 @@
-<h1>Analyzer#index</h1>
-<p>Find me in app/views/analyzer/index.html.erb</p>
+<div class="title-container">
+  <h1>Play analyzer</h1>
+  <p>You can analyze plays to see how many lines each character speaks. Simply provide the link for the play in xml format and press <em>Analyze</em>.</p>
+</div>
 
-<%= button_to 'Controller action', action: 'results' %>
+<div class="error-message">
+  <% flash.each do |key, value| %>
+    <%= "#{value}" %>
+  <% end %>
+</div>
+
+<div class="form-container">
+  <%= form_tag("/analyzer/results", method: "post") do %>
+    <%= label_tag(:play, "What play will be today?") %>
+    <%= text_field_tag(:play) %>
+    <%= submit_tag("Analyze") %>
+  <% end %>
+</div>

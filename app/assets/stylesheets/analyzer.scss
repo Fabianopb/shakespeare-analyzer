@@ -7,6 +7,14 @@
   text-align: center;
 }
 
+.error-message {
+  background-color: #e74c3c;
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 10px;
+}
+
 #graph-container {
   display: flex;
   justify-content: center;

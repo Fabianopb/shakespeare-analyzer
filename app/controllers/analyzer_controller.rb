@@ -5,24 +5,35 @@ class AnalyzerController < ApplicationController
 
   def results
 
+    url = params[:play]
+
     @@speechCount = Hash.new
     @speechCount = @@speechCount
 
-    doc = Nokogiri::XML(open('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml'))
+    # if doc.nil?
+    #   render 'Something went wrong! Are you sure the link is correct?'
+    # end
+    begin
+      doc = Nokogiri::XML(open(url))
 
-    @title = doc.css('TITLE').first.content
+      @title = doc.css('TITLE').first.content
 
-    speeches = doc.css('SPEECH')
-    totalLines = doc.css('LINE')
-    speeches.each do |speech|
-      speaker = speech.at_css('SPEAKER').content
-      lines = speech.css('LINE')
-      if speaker != 'ALL'
-        @@speechCount[speaker] = @@speechCount[speaker].nil? ? lines.size : @@speechCount[speaker] + lines.size
+      speeches = doc.css('SPEECH')
+      totalLines = doc.css('LINE')
+      speeches.each do |speech|
+        speaker = speech.at_css('SPEAKER').content
+        lines = speech.css('LINE')
+        if speaker != 'ALL'
+          @@speechCount[speaker] = @@speechCount[speaker].nil? ? lines.size : @@speechCount[speaker] + lines.size
+        end
       end
-    end
 
-    @@speechCount = @speechCount
+      @@speechCount = @speechCount
+
+    rescue Exception => e
+      flash[:error] = 'Something went wrong, are you sure the url is correct?'
+      redirect_to action: index
+    end
 
   end
 
