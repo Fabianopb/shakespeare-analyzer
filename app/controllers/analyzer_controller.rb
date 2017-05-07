@@ -35,15 +35,21 @@ class AnalyzerController < ApplicationController
   end
 
   def results_data
-    data = Array.new
-    @@speechCount.each do |speaker, lines|
-      dataPoint = Hash.new
-      dataPoint['speaker'] = speaker.capitalize
-      dataPoint['lines'] = lines
-      data.push dataPoint
+
+    begin
+      data = Array.new
+      @@speechCount.each do |speaker, lines|
+        dataPoint = Hash.new
+        dataPoint['speaker'] = speaker.capitalize
+        dataPoint['lines'] = lines
+        data.push dataPoint
+      end
+      data.sort_by! { |dataPoint| dataPoint['lines'] }
+      render :json => data.reverse
+    rescue Exception => e
+      redirect_to action: index
     end
-    data.sort_by! { |dataPoint| dataPoint['lines'] }
-    render :json => data.reverse
+
   end
 
 end
