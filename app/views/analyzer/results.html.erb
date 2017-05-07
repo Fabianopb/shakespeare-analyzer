@@ -2,7 +2,7 @@
 <p>Find me in app/views/analyzer/results.html.erb</p>
 
 <ul>
-  <% @speechCount.each do |speech| %>
-    <li><%= "#{speech[0]}, #{speech[1]}" %></li>
+  <% @speechCount.each do |speaker, lines| %>
+    <li><%= "#{speaker}, #{lines}" %></li>
   <% end %>
 </ul>
